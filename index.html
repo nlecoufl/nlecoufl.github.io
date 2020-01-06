@@ -1,0 +1,170 @@
+<html>
+    <link href="view.css" rel="stylesheet">
+    <head>
+        <title>Simulating Douple Spending Attack</title>
+        <body>
+            <h1><center>Simulating Douple Spending Attack</center></h1>
+        </body>
+    </head>
+    <body>
+        <div class="slidecontainer">
+            <label for="z">z :</label>
+            <input type="range" id="z" name="z" value="3" max="100" min="0" step="1" class="slider" onchange="updatezInput(this.value);">
+            <output type="number" id="zInput" value="3">3</output><br>
+            <label for="v">v :</label>
+            <input type="range" id="v" name="v" value="1" max="100" min="0" step="5" class="slider" onchange="updatevInput(this.value);">
+            <output type="number" id="vInput" value="1">1</output><br>
+            <label for="n">n :</label>
+            <input type="range" id="n" name="n" value="1000" max="20000" min="0" step="" class="slider" onchange="updatenInput(this.value);">
+            <output type="number" id="nInput" value="1000">1000</output><br>
+            <label for="A">A :</label>
+            <input type="range" id="A" name="A" value="5" max="100" min="0" step="5" class="slider" onchange="updateAInput(this.value);">
+            <output type="number" id="AInput" value="5">5</output><br>
+        </div>
+        <p>Click the following button and see result</p>
+        <form>
+           <input type="button" onclick="display()" value="Click me" />
+        </form>
+
+
+        <canvas id="line-chart" width="1200" height="500"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+        <script>
+            var Q=range(0,50,1);
+
+            function AttackCycle(q,z,v,A)
+            {
+                var prerevenue = 1;
+                if(q===0)
+                    q=0.00001;
+                var time=1/q;
+
+                var nbrHonnestBlocks = 0;
+                var nbrAttackBlocks = 0;
+
+                retard = nbrHonnestBlocks - nbrAttackBlocks;
+
+                while((retard<A) && (nbrHonnestBlocks < z))
+                {
+                    var rand = Math.random();
+                    if(rand<=q)
+                        nbrAttackBlocks+=1;
+                    else
+                        nbrHonnestBlocks+=1;
+                        time+=1/(1-q);
+                    
+                    retard=nbrHonnestBlocks-nbrAttackBlocks;
+                }
+
+                var revenue=0
+                if(retard<0)
+                    revenue = v+nbrAttackBlocks+prerevenue;
+
+                return [revenue,time,nbrAttackBlocks,nbrHonnestBlocks]
+            }
+
+            function Attack(q,z,v,n,A)
+            {
+                var revenue=0;
+                var time=0;
+                for (let i=0; i<n; i++)
+                {
+                    var cycle = AttackCycle(q,z,v,A);
+                    revenue += cycle[0];
+                    time += cycle[1];
+                }
+                return revenue/time;
+            }
+
+            function range(start, edge, step) {
+                // If only 1 number passed make it the edge and 0 the start
+                if (arguments.length === 1) {
+                edge = start;
+                start = 0;
+                }
+            
+                // Validate edge/start
+                edge = edge || 0;
+                step = step || 1;
+            
+                // Create array of numbers, stopping before the edge
+                let arr = [];
+                for (arr; (edge - start) * step > 0; start += step) {
+                arr.push(start);
+                }
+                return arr;
+            }
+
+            function Print(z,v,n,A)
+            {
+                var Y= [];
+                for(q=0;q<Q.length;q++){
+                    Y.push(Attack(Q[q]/100,z,v,n,A));
+                }
+                return Y;
+            }
+
+            function updatezInput(val) {
+                document.getElementById('zInput').value=val; 
+            }
+            function updatevInput(val) {
+                document.getElementById('vInput').value=val; 
+            }
+            function updatenInput(val) {
+                document.getElementById('nInput').value=val; 
+            }
+            function updateAInput(val) {
+                document.getElementById('AInput').value=val; 
+            }
+            
+            function divide(arr,divisor){
+                var array= [];
+                for(i=0;i<arr.length;i++){
+                    array.push(arr[i]/divisor);
+                }
+                return array;
+            }
+            
+
+            function display(){
+                var z = parseInt(document.getElementById("z").value);
+                var v = parseInt(document.getElementById("v").value);
+                var n = parseInt(document.getElementById("n").value);
+                var a = parseInt(document.getElementById("A").value);
+                var Y = Print(z,v,n,a);
+                var Qbis = divide(Q,100);
+                var ctx = document.getElementById("line-chart");
+                var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Q,
+                    datasets: [{
+                    label: 'Attackers',
+                    data: Y,
+                    borderColor: "#FF0000",
+                    fill: true,
+                    backgroundColor:"rgba(255, 10, 13, 0.3)"
+                    },
+                    {
+                    label: 'Honnests',
+                    data: Qbis,
+                    borderColor: "#0000FF",
+                    fill: true,
+                    backgroundColor: "rgba(0, 0, 255, 0.3)"
+                    }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                },
+                width:50,
+                height:30
+                });
+                return false;
+
+                } 
+        </script>
+    </body>
+</html>
+ 
