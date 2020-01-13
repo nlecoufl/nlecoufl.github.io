@@ -31,7 +31,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
         <script>
-            var Q=range(0,50,1);
+            
 
             function AttackCycle(q,z,v,A)
             {
@@ -98,6 +98,7 @@
 
             function Print(z,v,n,A)
             {
+                var Q=range(0,50,1);
                 var Y= [];
                 for(q=0;q<Q.length;q++){
                     Y.push(Attack(Q[q]/100,z,v,n,A));
@@ -131,6 +132,7 @@
                 if (myChart) {
                     myChart.destroy();
                 }
+                var Q=range(0,50,1);
                 var z = parseInt(document.getElementById("z").value);
                 var v = parseInt(document.getElementById("v").value);
                 var n = parseInt(document.getElementById("n").value);
