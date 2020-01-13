@@ -27,3 +27,8 @@
   background: #3e95cd;
   cursor: pointer;
 }
+
+.wrapper {
+  height: 1200px !important;
+  width: 500px !important;
+}
