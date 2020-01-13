@@ -128,6 +128,9 @@
             
 
             function display(){
+                if (myChart) {
+                    myChart.destroy();
+                }
                 var z = parseInt(document.getElementById("z").value);
                 var v = parseInt(document.getElementById("v").value);
                 var n = parseInt(document.getElementById("n").value);
