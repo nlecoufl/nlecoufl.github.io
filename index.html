@@ -1,7 +1,5 @@
 <html>
     <link rel="stylesheet" type="text/css" href="view.css">
-
-
     <head>
         <title>Simulation d'une attaque à la double dépense</title>
         <body>
@@ -27,13 +25,11 @@
         <form>
            <input type="button" onclick="display()" value="Click me" />
         </form>
-
         <div class="wrapper">
             <canvas id="line-chart" width="1200" height="500"></canvas>
         </div>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-        
         <script>
             function AttackCycle(q,z,v,A)
             {
@@ -41,12 +37,9 @@
                 if(q===0)
                     q=0.00001;
                 var time=1/q;
-
                 var nbrHonnestBlocks = 0;
                 var nbrAttackBlocks = 0;
-
                 retard = nbrHonnestBlocks - nbrAttackBlocks;
-
                 while((retard<A) && (nbrHonnestBlocks < z))
                 {
                     var rand = Math.random();
@@ -58,14 +51,11 @@
                     
                     retard=nbrHonnestBlocks-nbrAttackBlocks;
                 }
-
                 var revenue=0
                 if(retard<0)
                     revenue = v+nbrAttackBlocks+prerevenue;
-
                 return [revenue,time,nbrAttackBlocks,nbrHonnestBlocks]
             }
-
             function Attack(q,z,v,n,A)
             {
                 var revenue=0;
@@ -78,7 +68,6 @@
                 }
                 return revenue/time;
             }
-
             function range(start, edge, step) {
                 // If only 1 number passed make it the edge and 0 the start
                 if (arguments.length === 1) {
@@ -97,7 +86,6 @@
                 }
                 return arr;
             }
-
             function Print(z,v,n,A)
             {
                 var Q=range(0,50,1);
@@ -107,7 +95,6 @@
                 }
                 return Y;
             }
-
             function updatezInput(val) {
                 document.getElementById('zInput').value=val; 
             }
@@ -129,7 +116,6 @@
                 return array;
             }
             
-
             function display(){
                 if (myChart) {
                     myChart.destroy();
@@ -182,14 +168,11 @@
                     },
                     maintainAspectRatio: false,
                     events: []
-                    }
-                }
-                
+                },
+
                 });
                 return false;
-
                 } 
         </script>
     </body>
 </html>
- 
