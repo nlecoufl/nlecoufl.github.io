@@ -8,16 +8,16 @@
     </head>
     <body>
         <div class="slidecontainer">
-            <label for="z">z :</label>
+            <label for="z">Nombre de confirmations :</label>
             <input type="range" id="z" name="z" value="3" max="100" min="0" step="1" class="slider" onchange="updatezInput(this.value);">
             <output type="number" id="zInput" value="3">3</output><br>
-            <label for="v">v :</label>
-            <input type="range" id="v" name="v" value="1" max="100" min="0" step="5" class="slider" onchange="updatevInput(this.value);">
+            <label for="v">Montant de la double dépense :</label>
+            <input type="range" id="v" name="v" value="1" max="10000" min="0" step="5" class="slider" onchange="updatevInput(this.value);">
             <output type="number" id="vInput" value="1">1</output><br>
-            <label for="n">n :</label>
+            <label for="n">Nombre d'itérations :</label>
             <input type="range" id="n" name="n" value="1000" max="20000" min="0" step="" class="slider" onchange="updatenInput(this.value);">
             <output type="number" id="nInput" value="1000">1000</output><br>
-            <label for="A">A :</label>
+            <label for="A">Retard autorisé avec la blockchain officielle :</label>
             <input type="range" id="A" name="A" value="5" max="100" min="0" step="1" class="slider" onchange="updateAInput(this.value);">
             <output type="number" id="AInput" value="5">5</output><br>
         </div>
