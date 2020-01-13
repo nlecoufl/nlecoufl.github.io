@@ -161,7 +161,7 @@
                     ]
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     scales: {
                         xAxes: [ {
                             display: true,
@@ -177,10 +177,10 @@
                                 labelString: 'Revenue Ratio'
                             }
                         } ]
-                    }
+                    },
+                    maintainAspectRatio: false
                 },
-                width:50,
-                height:30
+                
                 });
                 return false;
 
