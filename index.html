@@ -45,13 +45,12 @@
                     var rand = Math.random();
                     if(rand<=q){
                         nbrAttackBlocks+=1;
-                        time+=1/q;
                     }
                     else{
                         nbrHonnestBlocks+=1;
-                        time+=1/(1-q);
                     }
                     
+                    time+=1;
                     retard=nbrHonnestBlocks-nbrAttackBlocks;
                     if(retard<0){
                         var revenue = v+nbrAttackBlocks+prerevenue;
