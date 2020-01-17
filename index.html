@@ -43,13 +43,14 @@
                 while((retard<A) && (nbrHonnestBlocks < z))
                 {
                     var rand = Math.random();
-                    if(rand<=q)
+                    if(rand<=q){
                         nbrAttackBlocks+=1;
-                    else
+                        time+=1/q;
+                    }
+                    else{
                         nbrHonnestBlocks+=1;
-                    
-                    time+=1;
-                        
+                        time+=1/(1-q);  
+                    }
                     
                     retard=nbrHonnestBlocks-nbrAttackBlocks;
                     if(retard<0){
