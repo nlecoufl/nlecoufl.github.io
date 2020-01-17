@@ -53,9 +53,9 @@
                     
                     retard=nbrHonnestBlocks-nbrAttackBlocks;
                 }
-                var revenue=0
+                var revenue=prerevenue;
                 if(retard<0)
-                    revenue = v+nbrAttackBlocks+prerevenue;
+                    revenue = v+nbrAttackBlocks;
                 return [revenue,time,nbrAttackBlocks,nbrHonnestBlocks]
             }
             function Attack(q,z,v,n,A)
